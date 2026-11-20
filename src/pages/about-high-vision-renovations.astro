@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import TestimonialGrid from '../components/TestimonialGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="About High Vision Renovations | Luxury Melbourne"
+  description="About High Vision Renovations, a Melbourne renovation company focused on practical planning, buildable design and controlled delivery."
+  canonicalPath="/about-high-vision-renovations"
+>
+  <PageHero
+    title="About High Vision Renovations"
+    subtitle="A Melbourne renovation company helping homeowners plan and deliver practical, well-managed home renovations across existing homes."
+    secondaryHref="/renovation-projects"
+    secondaryLabel="View Projects"
+  />
+
+  <section class="section">
+    <div class="container about-grid">
+      <div class="prose">
+        <p class="eyebrow">Trusted Melbourne Renovation Company</p>
+        <h2>Practical planning. Buildable design. Controlled delivery.</h2>
+        <p>
+          High Vision Renovations is a Melbourne renovation company helping homeowners plan and deliver practical,
+          well-managed home renovations across existing homes. We complete kitchen renovations, bathroom upgrades,
+          extensions, and wider home upgrades with a clear focus on function, buildability, and day-to-day liveability.
+        </p>
+        <p>
+          We assess layout options, identify structural requirements, review services such as plumbing and electrical,
+          and consider approvals where they apply. From there, we define scope, sequence trades properly, and keep
+          communication clear from first enquiry through to handover.
+        </p>
+        <p>
+          You can expect straightforward advice, clear communication, and decisions backed by practical renovation
+          experience. With 10+ years of industry experience and 250+ renovation projects completed, we understand the
+          planning, sequencing, and trade coordination required to deliver practical outcomes in existing homes.
+        </p>
+      </div>
+      <aside class="stats">
+        <div><strong>10+</strong><span>Years experience</span></div>
+        <div><strong>250+</strong><span>Projects completed</span></div>
+        <div><strong>10-year</strong><span>Workmanship guarantee</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">How we work</p>
+        <h2>What you can expect</h2>
+      </div>
+      <div class="expect-grid">
+        <article>
+          <h3>Informed decisions early</h3>
+          <p>
+            We help Melbourne homeowners make informed decisions early, with clearer scope, realistic allowances, and
+            renovation planning that reflects how the home is actually built.
+          </p>
+        </article>
+        <article>
+          <h3>Buildability first</h3>
+          <p>
+            We test ideas against access, structure, services, and approvals so work can be staged in the right order.
+            That helps reduce avoidable delays and mid-project changes.
+          </p>
+        </article>
+        <article>
+          <h3>Clear communication</h3>
+          <p>
+            You receive clear communication throughout the build, along with practical updates, documented changes, and
+            quality checks at key stages before handover.
+          </p>
+        </article>
+        <article>
+          <h3>Dedicated project management</h3>
+          <p>
+            You have a dedicated project manager from the early stages through to handover. They provide regular updates,
+            explain changes as they arise, and remain your main point of contact throughout the project.
+          </p>
+        </article>
+      </div>
+      <div class="btn-row">
+        <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+        <Button href="/contact-high-vision-renovations" variant="outline">Contact Us</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="eyebrow">Clients</p>
+        <h2>What homeowners say</h2>
+      </div>
+      <TestimonialGrid limit={3} />
+    </div>
+  </section>
+
+  <ContactForm heading="Talk to us about your renovation" variant="contact" />
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .stats {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stats div {
+    background: var(--color-paper);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.4rem;
+  }
+
+  .stats strong {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .expect-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .expect-grid article {
+    padding: 1.4rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: white;
+  }
+
+  .expect-grid p {
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .about-grid,
+    .expect-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

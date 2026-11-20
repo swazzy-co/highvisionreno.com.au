@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import { services, getService } from '../../data/services';
+import { faqs } from '../../data/faqs';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug } }));
+}
+
+const { slug } = Astro.params;
+const service = getService(slug!);
+if (!service) throw new Error(`Unknown service: ${slug}`);
+
+const relatedFaqs = faqs
+  .filter((f) => {
+    const q = f.question.toLowerCase();
+    const key = service.shortTitle.toLowerCase().split(' ')[0];
+    return q.includes(key) || f.slug.includes(service.slug.split('-')[0]);
+  })
+  .slice(0, 5);
+---
+
+<BaseLayout
+  title={`${service.title} | High Vision Renovations`}
+  description={service.description}
+  canonicalPath={`/renovation-service/${service.slug}`}
+  ogImage={service.image}
+>
+  <PageHero
+    title={service.shortTitle}
+    subtitle={service.summary}
+    image={service.image}
+    secondaryHref="/renovation-services"
+    secondaryLabel="All Services"
+  />
+
+  <section class="section">
+    <div class="container detail">
+      <div class="prose">
+        {service.body.map((para) => <p>{para}</p>)}
+      </div>
+      <aside>
+        <p class="eyebrow">Included focus</p>
+        <ul>
+          {service.highlights.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="btn-row">
+          <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {relatedFaqs.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <div class="section__header">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common questions</h2>
+        </div>
+        <FAQAccordion items={relatedFaqs} />
+      </div>
+    </section>
+  )}
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .detail {
+    display: grid;
+    grid-template-columns: 1.35fr 0.8fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  aside {
+    background: var(--color-paper);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+  }
+
+  aside ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.1rem;
+    color: var(--color-ink-soft);
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  @media (max-width: 860px) {
+    .detail {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

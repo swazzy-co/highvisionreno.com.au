@@ -1,0 +1,192 @@
+---
+import { formOptions, site } from '../data/site';
+
+interface Props {
+  heading?: string;
+  variant?: 'project' | 'contact';
+}
+
+const {
+  heading = 'Share details about your renovation project',
+  variant = 'project',
+} = Astro.props;
+
+const action = `https://formsubmit.co/${site.email}`;
+---
+
+<section class="form-block" id="enquiry-form">
+  <div class="container form-block__inner">
+    <div class="form-block__intro">
+      <p class="eyebrow">Enquiry</p>
+      <h2>{heading}</h2>
+      <p>
+        Send your project details and we will review the scope, location, and goals.
+        Prefer to talk? Call <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> or email
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+
+    <form class="enquiry-form" action={action} method="POST">
+      <input type="hidden" name="_subject" value="New High Vision Renovations enquiry" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_next" value={`${site.url}/tell-us-about-your-renovation-project?sent=1`} />
+      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      {variant === 'project' && (
+        <>
+          <label>
+            <span>Project Description *</span>
+            <textarea name="project_description" rows="5" required placeholder="Provide a brief description of your project"></textarea>
+          </label>
+
+          <div class="enquiry-form__grid">
+            <label>
+              <span>Primary Service Required *</span>
+              <select name="primary_service" required>
+                <option value="">(Select a Service)</option>
+                {formOptions.services.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </label>
+
+            <label>
+              <span>Budget *</span>
+              <select name="budget" required>
+                <option value="">(Select your budget)</option>
+                {formOptions.budgets.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </label>
+
+            <label>
+              <span>Time Frame *</span>
+              <select name="time_frame" required>
+                <option value="">(Select a time frame)</option>
+                {formOptions.timeframes.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </label>
+
+            <label>
+              <span>Street Address *</span>
+              <input type="text" name="street_address" required placeholder="Enter your street address..." />
+            </label>
+          </div>
+
+          <label>
+            <span>Business Name (if applicable)</span>
+            <input type="text" name="business_name" placeholder="Business Name (if applicable)" />
+          </label>
+        </>
+      )}
+
+      {variant === 'contact' && (
+        <label>
+          <span>Message *</span>
+          <textarea name="message" rows="5" required placeholder="Tell us about your renovation enquiry"></textarea>
+        </label>
+      )}
+
+      <div class="enquiry-form__grid">
+        <label>
+          <span>Your Name *</span>
+          <input type="text" name="name" required placeholder="Enter your name" />
+        </label>
+        <label>
+          <span>Email Address *</span>
+          <input type="email" name="email" required placeholder="Enter your email address" />
+        </label>
+        <label>
+          <span>Phone Number *</span>
+          <input type="tel" name="phone" required placeholder="Enter your phone number" />
+        </label>
+      </div>
+
+      <button class="btn btn--primary" type="submit">
+        <span>Submit Enquiry</span>
+        <span class="btn__dot" aria-hidden="true">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .form-block {
+    padding: clamp(4rem, 7vw, 6rem) 0;
+    background: var(--color-paper);
+  }
+
+  .form-block__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .form-block__intro h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+  }
+
+  .form-block__intro p {
+    color: var(--color-ink-soft);
+  }
+
+  .enquiry-form {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: calc(var(--radius-md) + 4px);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    display: grid;
+    gap: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .enquiry-form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  label span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 0.7rem;
+    padding: 0.85rem 0.95rem;
+    background: var(--color-white);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid rgba(13, 46, 62, 0.25);
+    outline-offset: 1px;
+  }
+
+  .honey {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  @media (max-width: 900px) {
+    .form-block__inner,
+    .enquiry-form__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

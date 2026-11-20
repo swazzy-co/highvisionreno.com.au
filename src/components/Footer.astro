@@ -1,0 +1,120 @@
+---
+import { site } from '../data/site';
+import { services } from '../data/services';
+import Button from './Button.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="eyebrow" style="color: rgba(255,255,255,0.55)">Melbourne Office</p>
+      <h2>High Vision Renovations</h2>
+      <p>{site.address.full}</p>
+      <div class="btn-row">
+        <Button href={`tel:${site.phone}`} variant="ghost">Call {site.phoneDisplay}</Button>
+        <Button href={`mailto:${site.email}`} variant="ghost">Email Us</Button>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow" style="color: rgba(255,255,255,0.55)">Quick Links</p>
+      <ul>
+        <li><a href="/renovation-services">Renovation Services</a></li>
+        <li><a href="/renovation-projects">Renovation Projects</a></li>
+        <li><a href="/about-high-vision-renovations">About High Vision Renovations</a></li>
+        <li><a href="/tell-us-about-your-renovation-project">Get Started</a></li>
+        <li><a href="/contact-high-vision-renovations">Contact High Vision Renovations</a></li>
+        <li><a href="/faqs">FAQs</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="eyebrow" style="color: rgba(255,255,255,0.55)">Services</p>
+      <ul>
+        {services.slice(0, 6).map((service) => (
+          <li>
+            <a href={`/renovation-service/${service.slug}`}>{service.shortTitle}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="eyebrow" style="color: rgba(255,255,255,0.55)">Legal</p>
+      <ul>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+        <li><a href="/copyright-notice">Copyright Notice</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>Copyright High Vision Renovations {year}</p>
+    <p>ABN {site.abn}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-primary-deep);
+    color: rgba(255, 255, 255, 0.82);
+    padding: 4.5rem 0 2rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .site-footer h2 {
+    color: var(--color-white);
+    font-size: 1.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .site-footer a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .site-footer a:hover {
+    color: var(--color-white);
+  }
+
+  .site-footer__bottom {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  @media (max-width: 960px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { projects } from '../data/projects';
+---
+
+<BaseLayout
+  title="Renovation Projects Melbourne | High Vision Renovations"
+  description="Explore completed High Vision Renovations projects across Melbourne, including luxury kitchens, bathrooms, and whole-home transformations."
+  canonicalPath="/renovation-projects"
+>
+  <PageHero
+    title="Renovation Projects"
+    subtitle="Real homes across Melbourne’s most sought-after suburbs — crafted with precision, clear communication, and refined finishes."
+  />
+
+  <section class="section">
+    <div class="container projects">
+      {projects.map((project) => (
+        <article>
+          <a href={`/renovation-project/${project.slug}`} class="projects__media">
+            <img src={project.heroImage} alt={`${project.title} renovation`} loading="lazy" />
+          </a>
+          <div>
+            <p class="eyebrow">{project.suburb} VIC {project.postcode}</p>
+            <h2>{project.title}</h2>
+            <p>{project.summary}</p>
+            <Button href={`/renovation-project/${project.slug}`} variant="outline">View Project</Button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .projects {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .projects article {
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  .projects__media {
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .projects img {
+    width: 100%;
+    height: 22rem;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .projects__media:hover img {
+    transform: scale(1.03);
+  }
+
+  .projects p {
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .projects article {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

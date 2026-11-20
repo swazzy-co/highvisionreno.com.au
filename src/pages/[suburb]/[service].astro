@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { suburbs, suburbName } from '../../data/suburbs';
+import { getService, suburbServiceSlugs } from '../../data/services';
+
+export function getStaticPaths() {
+  return suburbs.flatMap((suburb) =>
+    suburbServiceSlugs.map((service) => ({
+      params: { suburb, service },
+    })),
+  );
+}
+
+const { suburb, service: serviceSlug } = Astro.params;
+const name = suburbName(suburb!);
+const service = getService(serviceSlug!);
+const title = service?.shortTitle || 'Heritage Home Restoration';
+const summary =
+  service?.summary ||
+  `Heritage-sensitive renovation and restoration planning for established homes in ${name}, with careful detailing and council-aware delivery.`;
+---
+
+<BaseLayout
+  title={`${title} ${name} | High Vision Renovations`}
+  description={`${title} in ${name} by High Vision Renovations. Practical planning, quality craftsmanship, and clear project communication across Melbourne.`}
+  canonicalPath={`/${suburb}/${serviceSlug}`}
+>
+  <PageHero
+    title={`${title} in ${name}`}
+    subtitle={summary}
+    image={service?.image || '/images/hero-toorak.webp'}
+  />
+
+  <section class="section">
+    <div class="container-narrow prose">
+      {service ? service.body.map((para) => <p>{para}</p>) : (
+        <>
+          <p>
+            Heritage home restoration in {name} requires careful planning around original fabric, overlays, and modern
+            liveability. We help homeowners improve kitchens, bathrooms, structure, and services while respecting the
+            character that makes these homes distinctive.
+          </p>
+          <p>
+            Our team coordinates consultants, approvals pathways, and construction sequencing so upgrades remain
+            buildable and well documented from concept through handover.
+          </p>
+        </>
+      )}
+      <p>
+        If you are planning {title.toLowerCase()} in {name}, start with a clear brief — rooms involved, whether you will
+        remain on site, and any existing drawings or consultant input. We will help you understand scope, constraints,
+        and practical next steps.
+      </p>
+      <div class="btn-row">
+        <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+        <Button href={`/${suburb}`} variant="outline">More in {name}</Button>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>

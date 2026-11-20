@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { faqs, getFaq } from '../../data/faqs';
+
+export function getStaticPaths() {
+  return faqs.map((faq) => ({ params: { slug: faq.slug } }));
+}
+
+const { slug } = Astro.params;
+const faq = getFaq(slug!);
+if (!faq) throw new Error(`Unknown FAQ: ${slug}`);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${faq.question} | High Vision Renovations`}
+  description={faq.shortAnswer || faq.answer.slice(0, 155)}
+  canonicalPath={`/faqs/${faq.slug}`}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
+  <PageHero title={faq.question} subtitle="High Vision Renovations FAQ" ctaLabel="Discuss Your Project" />
+
+  <section class="section">
+    <div class="container-narrow prose">
+      {faq.answer.split('\n\n').map((para) => <p>{para}</p>)}
+      <div class="btn-row">
+        <Button href="/faqs" variant="outline">All FAQs</Button>
+        <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm variant="contact" />
+</BaseLayout>

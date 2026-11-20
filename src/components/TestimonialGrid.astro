@@ -1,0 +1,93 @@
+---
+import { testimonials } from '../data/testimonials';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit = 6 } = Astro.props;
+const items = testimonials.slice(0, limit);
+---
+
+<div class="quotes">
+  {items.map((item) => (
+    <article class="quote">
+      <div class="quote__stars" aria-label="5 star rating">★★★★★</div>
+      <p>“{item.quote}”</p>
+      <div class="quote__meta">
+        <span class="quote__avatar" aria-hidden="true">{item.name.charAt(0)}</span>
+        <div>
+          <strong>{item.name}</strong>
+          {item.verified && <span class="quote__badge">Verified Client</span>}
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .quote {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.4rem;
+    display: grid;
+    gap: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quote__stars {
+    color: #c4a35a;
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+  }
+
+  .quote p {
+    color: var(--color-ink-soft);
+    font-size: 0.98rem;
+  }
+
+  .quote__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .quote__avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+  }
+
+  .quote__badge {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 960px) {
+    .quotes {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quotes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

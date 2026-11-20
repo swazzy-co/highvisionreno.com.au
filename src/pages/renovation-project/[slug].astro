@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { projects, getProject } from '../../data/projects';
+import { getService } from '../../data/services';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProject(slug!);
+if (!project) throw new Error(`Unknown project: ${slug}`);
+---
+
+<BaseLayout
+  title={`${project.title} Renovation | High Vision Renovations`}
+  description={project.summary}
+  canonicalPath={`/renovation-project/${project.slug}`}
+  ogImage={project.heroImage}
+>
+  <PageHero
+    title={project.title}
+    subtitle={project.summary}
+    image={project.heroImage}
+    secondaryHref="/renovation-projects"
+    secondaryLabel="All Projects"
+  />
+
+  <section class="section">
+    <div class="container prose" style="max-width:46rem">
+      <p>{project.description}</p>
+      <p>
+        Ready to transform your house or property into a stunning masterpiece? At High Vision Renovations, our expert
+        renovators and builders specialise in luxury renovations, home extensions, kitchens, and bathrooms across Melbourne.
+      </p>
+      <div class="btn-row">
+        <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+        <Button href="/contact-high-vision-renovations" variant="outline">Contact Us</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container gallery">
+      {project.gallery.map((src, i) => (
+        <img src={src} alt={`${project.title} renovation photo ${i + 1}`} loading="lazy" />
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Related services</p>
+        <h2>Works featured in this project</h2>
+      </div>
+      <div class="related">
+        {project.services.map((slug) => {
+          const service = getService(slug);
+          if (!service) return null;
+          return (
+            <a href={`/renovation-service/${service.slug}`}>
+              <strong>{service.shortTitle}</strong>
+              <span>Learn more</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.85rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    border-radius: 0.9rem;
+  }
+
+  .gallery img:first-child {
+    grid-column: span 4;
+    height: 22rem;
+  }
+
+  .gallery img:nth-child(2),
+  .gallery img:nth-child(3) {
+    grid-column: span 2;
+    height: 10.55rem;
+  }
+
+  .gallery img:nth-child(n + 4) {
+    grid-column: span 2;
+  }
+
+  .related {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .related a {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.2rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+
+  .related span {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 860px) {
+    .gallery,
+    .related {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery img,
+    .gallery img:first-child,
+    .gallery img:nth-child(2),
+    .gallery img:nth-child(3),
+    .gallery img:nth-child(n + 4) {
+      grid-column: auto;
+      height: 14rem;
+    }
+  }
+</style>

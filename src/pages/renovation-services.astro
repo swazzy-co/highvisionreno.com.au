@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { services } from '../data/services';
+---
+
+<BaseLayout
+  title="Renovation Services Melbourne | High Vision Renovations"
+  description="Explore High Vision Renovations' Melbourne services including kitchens, bathrooms, extensions, full house renovations, outdoor areas, and planning."
+  canonicalPath="/renovation-services"
+>
+  <PageHero
+    title="Renovation Services"
+    subtitle="Luxury renovations across Melbourne — kitchens, bathrooms, extensions, full house transformations, outdoor entertainment areas, and more."
+    ctaLabel="Request a Consultation"
+  />
+
+  <section class="section">
+    <div class="container services">
+      {services.map((service) => (
+        <article>
+          <img src={service.image} alt="" loading="lazy" />
+          <div>
+            <h2>{service.shortTitle}</h2>
+            <p>{service.summary}</p>
+            <ul>
+              {service.highlights.map((item) => <li>{item}</li>)}
+            </ul>
+            <Button href={`/renovation-service/${service.slug}`} variant="outline">View Service</Button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .services {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .services article {
+    display: grid;
+    grid-template-columns: minmax(14rem, 22rem) 1fr;
+    gap: 1.75rem;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .services img {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .services h2 {
+    font-size: 1.7rem;
+  }
+
+  .services p,
+  .services li {
+    color: var(--color-ink-soft);
+  }
+
+  .services ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  @media (max-width: 800px) {
+    .services article {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="home-hero">
+  <img
+    class="home-hero__media"
+    src="/images/hero-toorak.webp"
+    alt="Luxury kitchen renovation in Toorak by High Vision Renovations"
+    width="1600"
+    height="1000"
+    fetchpriority="high"
+  />
+  <div class="home-hero__veil"></div>
+
+  <div class="home-hero__brand reveal">
+    <p>High Vision Renovations</p>
+  </div>
+
+  <div class="home-hero__project reveal reveal-delay-2">
+    <span class="home-hero__mark" aria-hidden="true">H</span>
+    <p class="home-hero__place">Toorak</p>
+    <Button href="/renovation-project/toorak" variant="ghost">View Project</Button>
+  </div>
+</section>
+
+<style>
+  .home-hero {
+    position: relative;
+    min-height: 100svh;
+    color: var(--color-white);
+    overflow: hidden;
+    display: grid;
+  }
+
+  .home-hero__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.04);
+    animation: fade 1.4s var(--ease), heroZoom 12s var(--ease) both;
+  }
+
+  @keyframes heroZoom {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .home-hero__veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(8, 32, 44, 0.28) 0%, rgba(8, 32, 44, 0.18) 35%, rgba(8, 32, 44, 0.55) 100%);
+  }
+
+  .home-hero__brand {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    padding-top: 2rem;
+  }
+
+  .home-hero__brand p {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.8vw, 1.55rem);
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .home-hero__project {
+    position: relative;
+    z-index: 1;
+    align-self: end;
+    padding: 0 0 2.5rem 1.5rem;
+    width: min(100% - 1.5rem, 22rem);
+  }
+
+  .home-hero__mark {
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 300;
+    line-height: 0.85;
+    opacity: 0.28;
+    letter-spacing: -0.04em;
+  }
+
+  .home-hero__place {
+    margin: 0.2rem 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 900px) {
+    .home-hero__project {
+      padding-left: max(1.5rem, calc((100vw - var(--container)) / 2));
+    }
+  }
+</style>

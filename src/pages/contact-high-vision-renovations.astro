@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import HoursTable from '../components/HoursTable.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/Button.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Contact High Vision Renovations Melbourne"
+  description="Contact High Vision Renovations for kitchen, bathroom, extension, and full home renovation advice across Melbourne."
+  canonicalPath="/contact-high-vision-renovations"
+>
+  <PageHero
+    title="Contact High Vision Renovations"
+    subtitle="Send your enquiry with project scope, budget range, property suburb, and timing. This gives us a clearer starting point and helps us respond with practical next steps."
+    ctaHref="#enquiry-form"
+    ctaLabel="Send an Enquiry"
+    secondaryHref={`tel:${site.phone}`}
+    secondaryLabel={`Call ${site.phoneDisplay}`}
+  />
+
+  <section class="section">
+    <div class="container contact">
+      <div class="prose">
+        <p class="eyebrow">Melbourne Office</p>
+        <h2>{site.address.full}</h2>
+        <p>
+          We start with a practical conversation about your home, goals, budget, timeframe, and the type of work you need.
+          If the project calls for it, we arrange a site visit to assess layout, access, existing conditions, and any
+          structural or service-related constraints.
+        </p>
+        <p>
+          You will then have a clearer view of what is realistic, what decisions are needed, and how to move forward —
+          including whether permits or approvals could apply.
+        </p>
+        <div class="btn-row">
+          <Button href={`mailto:${site.email}`} variant="outline">Email {site.email}</Button>
+          <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project</Button>
+        </div>
+      </div>
+      <div class="contact__hours">
+        <p class="eyebrow">Business hours</p>
+        <div class="hours-wrap">
+          <HoursTable />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">After you contact us</p>
+        <h2>What to expect</h2>
+      </div>
+      <div class="steps">
+        <article>
+          <h3>1. Practical conversation</h3>
+          <p>We discuss scope, budget, timing, and whether the work appears to be a fit for kitchens, bathrooms, extensions, or whole-home renovations.</p>
+        </article>
+        <article>
+          <h3>2. Site context</h3>
+          <p>Where useful, we assess layout, access, services, and constraints so advice stays grounded in the actual property.</p>
+        </article>
+        <article>
+          <h3>3. Clear next steps</h3>
+          <p>We outline likely sequencing, budget control considerations, and whether planning or design input should come next.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm heading="Get in touch with our Melbourne team" variant="contact" />
+</BaseLayout>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .hours-wrap {
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-md);
+    padding: 0.35rem;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .steps article {
+    background: white;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.35rem;
+  }
+
+  .steps p {
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .contact,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

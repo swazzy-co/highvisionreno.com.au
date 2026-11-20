@@ -1,0 +1,40 @@
+export const suburbs: string[] = [
+  "albert-park",
+  "armadale",
+  "balaclava",
+  "balwyn",
+  "balwyn-north",
+  "blackburn",
+  "blackburn-north",
+  "blackburn-south",
+  "box-hill",
+  "box-hill-north",
+  "box-hill-south",
+  "bulleen",
+  "camberwell",
+  "docklands",
+  "doncaster",
+  "doncaster-east",
+  "eaglemont",
+  "elwood",
+  "hawthorn",
+  "hawthorn-east",
+  "heidelberg",
+  "heidelberg-heights",
+  "ivanhoe",
+  "ivanhoe-east",
+  "kew",
+  "kew-east",
+  "middle-park",
+  "mitcham",
+  "mont-albert",
+  "nunawading",
+  "port-melbourne",
+  "surrey-hills",
+  "templestowe",
+  "templestowe-lower"
+];
+
+export function suburbName(slug: string): string {
+  return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}

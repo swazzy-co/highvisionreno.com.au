@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Disclaimer | High Vision Renovations Melbourne"
+  description="Review High Vision Renovations' disclaimer. Important legal information regarding our luxury renovation services, warranties, and client responsibilities in Melbourne."
+  canonicalPath="/disclaimer"
+>
+  <PageHero title="Disclaimer" subtitle="High Vision Renovations" ctaLabel="Contact Us" ctaHref="/contact-high-vision-renovations" />
+
+  <section class="section">
+    <div class="container-narrow prose">
+        <p>The information presented on the High Vision Renovations website is provided for general informational purposes only. Whilst we endeavour to ensure all content is accurate and up-to-date, High Vision Renovations makes no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability of the information, products, services or related graphics contained on this website.</p>
+        <p>The content on this website is not intended to substitute for professional advice specific to your renovation project. Every property and renovation requirement is unique, and we strongly encourage you to contact our experienced team directly for personalised consultation and accurate quotations tailored to your individual needs.</p>
+        <p>Please note that renovation costs, timeframes and outcomes can vary significantly based on numerous factors including property condition, design complexity, material selections and site-specific requirements. Images and examples shown represent past projects and may not reflect exact results achievable for your property.</p>
+        <p>High Vision Renovations shall not be liable for any loss or damage whatsoever arising from the use of this website or reliance upon its content. This includes, without limitation, any direct, indirect or consequential loss or damage. Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable.</p>
+        <p>This website may contain links to external sites that are not controlled by High Vision Renovations. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+    </div>
+  </section>
+
+  <ContactForm variant="contact" />
+</BaseLayout>

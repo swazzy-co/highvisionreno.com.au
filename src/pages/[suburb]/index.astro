@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { suburbs, suburbName } from '../../data/suburbs';
+import { services, suburbServiceSlugs } from '../../data/services';
+
+export function getStaticPaths() {
+  return suburbs.map((suburb) => ({ params: { suburb } }));
+}
+
+const { suburb } = Astro.params;
+const name = suburbName(suburb!);
+---
+
+<BaseLayout
+  title={`Home Renovations ${name} | High Vision Renovations`}
+  description={`High Vision Renovations delivers kitchen, bathroom, extension and full house renovations in ${name}, Melbourne. Practical planning and quality craftsmanship.`}
+  canonicalPath={`/${suburb}`}
+>
+  <PageHero
+    title={`Home Renovations in ${name}`}
+    subtitle={`Luxury renovations, kitchens, bathrooms, and extensions for homeowners in ${name} and surrounding Melbourne suburbs.`}
+  />
+
+  <section class="section">
+    <div class="container prose" style="max-width:48rem">
+      <p>
+        High Vision Renovations works with homeowners in {name} on practical, well-managed renovation projects —
+        from kitchen and bathroom upgrades through to home extensions and full house transformations. We plan around
+        existing structure, services, access, and local council considerations so the build stays controlled.
+      </p>
+      <p>
+        Whether you are refreshing key rooms before sale or reshaping how your home works day to day, our team provides
+        clear communication, coordinated trades, and finishes selected for longevity.
+      </p>
+      <div class="btn-row">
+        <Button href="/tell-us-about-your-renovation-project" variant="primary">Start a Project in {name}</Button>
+        <Button href="/renovation-projects" variant="outline">View Projects</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">{name} services</p>
+        <h2>Renovation services in {name}</h2>
+      </div>
+      <div class="suburb-services">
+        {suburbServiceSlugs.map((slug) => {
+          const service = services.find((s) => s.slug === slug);
+          const title = service?.shortTitle || 'Heritage Home Restoration';
+          const href = `/${suburb}/${slug}`;
+          return (
+            <a href={href}>
+              <strong>{title}</strong>
+              <span>View {name} page</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .suburb-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .suburb-services a {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.2rem;
+    background: white;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+
+  .suburb-services span {
+    color: var(--color-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 860px) {
+    .suburb-services {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

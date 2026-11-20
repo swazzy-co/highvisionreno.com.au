@@ -1,0 +1,6 @@
+name = "highvisionreno"
+compatibility_date = "2026-11-20"
+pages_build_output_dir = "dist"
+
+# Cloudflare Pages project configuration for Astro static output.
+# Deploy with: npx wrangler pages deploy dist --project-name=highvisionreno

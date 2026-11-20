@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { faqs } from '../../data/faqs';
+---
+
+<BaseLayout
+  title="Renovation FAQs Melbourne | High Vision Renovations"
+  description="Answers to common questions about kitchen renovations, bathrooms, extensions, full house renovations, permits, timelines, and budgets in Melbourne."
+  canonicalPath="/faqs"
+>
+  <PageHero
+    title="Frequently Asked Questions"
+    subtitle="Practical answers on budgets, timelines, permits, layouts, and renovation planning across Melbourne."
+    ctaHref="/tell-us-about-your-renovation-project"
+    ctaLabel="Ask About Your Project"
+  />
+
+  <section class="section">
+    <div class="container">
+      <FAQAccordion items={faqs} />
+    </div>
+  </section>
+
+  <ContactForm variant="contact" heading="Still have questions?" />
+</BaseLayout>

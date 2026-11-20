@@ -1,0 +1,92 @@
+---
+import type { FAQ } from '../data/faqs';
+
+interface Props {
+  items: FAQ[];
+  numbered?: boolean;
+}
+
+const { items, numbered = true } = Astro.props;
+---
+
+<div class="faq-list">
+  {items.map((item, index) => (
+    <details class="faq-item">
+      <summary>
+        <span class="faq-item__q">
+          {numbered && <span class="faq-item__n">{index + 1}.</span>}
+          {item.question}
+        </span>
+        <span class="faq-item__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-item__a">
+        {item.answer.split('\n\n').map((para) => <p>{para}</p>)}
+        <p>
+          <a href={`/faqs/${item.slug}`}>Full answer</a>
+        </p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+    font-weight: 500;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__q {
+    display: flex;
+    gap: 0.65rem;
+  }
+
+  .faq-item__n {
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .faq-item__icon {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.25s var(--ease);
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(225deg);
+  }
+
+  .faq-item__a {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--color-ink-soft);
+  }
+
+  .faq-item__a a {
+    font-size: 0.92rem;
+  }
+</style>

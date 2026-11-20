@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/Button.astro';
+
+const sent = Astro.url.searchParams.get('sent') === '1';
+---
+
+<BaseLayout
+  title="Get Started With Melbourne Renovations"
+  description="Start your Melbourne renovation with a clear process, practical advice and direct contact options. Speak with us about scope, timing and next steps."
+  canonicalPath="/tell-us-about-your-renovation-project"
+>
+  <PageHero
+    title="Tell us about your project"
+    subtitle="Share details about your renovation project. From initial planning to precise execution, our team is here to help bring your brief to life."
+    ctaHref="#enquiry-form"
+    ctaLabel="Share Project Details"
+    secondaryHref="/renovation-projects"
+    secondaryLabel="View Projects"
+  />
+
+  {sent && (
+    <div class="container">
+      <p class="sent" role="status">
+        Thanks — your enquiry has been submitted. We will review your details and respond as soon as possible.
+      </p>
+    </div>
+  )}
+
+  <section class="section">
+    <div class="container benefits">
+      <div class="section__header">
+        <p class="eyebrow">Why start here</p>
+        <h2>Clearer project scope from the first conversation</h2>
+      </div>
+      <div class="benefits__grid">
+        <article>
+          <h3>Define what is changing</h3>
+          <p>We help define what is staying, what is changing, and where structural, services, or layout constraints may affect the build.</p>
+        </article>
+        <article>
+          <h3>Identify cost drivers early</h3>
+          <p>A clearer brief makes it easier to identify major cost drivers such as joinery, structural work, wet areas, finishes, and access conditions.</p>
+        </article>
+        <article>
+          <h3>Flag approvals sooner</h3>
+          <p>If permits, engineering, or council requirements are likely, it helps to identify them at the start rather than after design has progressed too far.</p>
+        </article>
+      </div>
+      <div class="btn-row">
+        <Button href="/faqs" variant="outline">Browse FAQs</Button>
+        <Button href="/contact-high-vision-renovations" variant="outline">Contact Options</Button>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>
+
+<style>
+  .sent {
+    margin: 1.5rem auto 0;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: #e7f3ee;
+    color: var(--color-primary);
+    border: 1px solid rgba(47, 107, 92, 0.25);
+  }
+
+  .benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefits__grid article {
+    padding: 1.35rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  .benefits__grid p {
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .benefits__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

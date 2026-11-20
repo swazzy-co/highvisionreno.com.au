@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Copyright Notice | High Vision Renovations"
+  description="Read High Vision Renovations' copyright notice, terms for website content use, and intellectual property information for Melbourne users."
+  canonicalPath="/copyright-notice"
+>
+  <PageHero title="Copyright Notice" subtitle="High Vision Renovations" ctaLabel="Contact Us" ctaHref="/contact-high-vision-renovations" />
+
+  <section class="section">
+    <div class="container-narrow prose">
+        <p>All content on this website, including but not limited to text, photographs, graphics, logos, design elements, and multimedia materials, is the exclusive intellectual property of High Vision Renovations and is protected under Australian copyright laws.</p>
+        <p>High Vision Renovations retains all rights, title, and interest in the content displayed on this website. Our portfolio showcases bespoke luxury renovations and design work that represents years of craftsmanship and creative expertise. Each project featured demonstrates our commitment to excellence and innovation in the luxury renovation industry.</p>
+        <p>You may view and download content from this website solely for personal, non-commercial use. Any reproduction must retain all copyright and proprietary notices. Commercial use, modification, distribution, or republication of any content requires express written permission from High Vision Renovations.</p>
+        <p>Without our prior written consent, you may not copy, reproduce, modify, create derivative works from, distribute, transmit, or commercially exploit any content from this website. This includes using our images, design concepts, or project documentation for any business or promotional purposes.</p>
+        <p>High Vision Renovations actively monitors and protects its intellectual property rights. Unauthorised use of our content may result in legal proceedings, including claims for damages and injunctive relief. We reserve the right to pursue all available remedies under Australian law.</p>
+        <p>For licensing enquiries, permission requests, or questions regarding the use of our content, please contact us through our provided webforms. We welcome legitimate requests and are happy to discuss appropriate uses of our materials.</p>
+        <p>Some content on this website may include materials subject to third-party copyright. Such content is used with permission or under applicable fair use provisions. All trademarks and service marks displayed on this website belong to their respective owners.</p>
+    </div>
+  </section>
+
+  <ContactForm variant="contact" />
+</BaseLayout>

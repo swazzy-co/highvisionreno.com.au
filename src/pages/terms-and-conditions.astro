@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Terms and Conditions | High Vision Renovations"
+  description="Review High Vision Renovations' terms and conditions for luxury renovation services in Melbourne. Legal terms, warranties, and client agreements outlined."
+  canonicalPath="/terms-and-conditions"
+>
+  <PageHero title="Terms and Conditions" subtitle="High Vision Renovations" ctaLabel="Contact Us" ctaHref="/contact-high-vision-renovations" />
+
+  <section class="section">
+    <div class="container-narrow prose">
+        <p>These terms and conditions govern your engagement with High Vision Renovations for all renovation, construction, and design services. By accepting our quotation or engaging our services, you agree to be bound by these terms.</p>
+        <p>In these terms, "we", "us", and "our" refer to High Vision Renovations ABN 88 661 992 187. "You" and "your" refer to the client engaging our services. "Services" means all renovation, construction, design, and consultation work we provide. "Project" refers to the specific work outlined in your accepted quotation.</p>
+        <p>All quotations remain valid for thirty days from the date of issue unless otherwise specified. Quotations are based on the scope of work discussed and any site inspections conducted. Acceptance of our quotation constitutes a binding agreement to proceed with the project under these terms.</p>
+        <p>Should additional work be required beyond the original scope, we will provide supplementary quotations for your approval before proceeding. Any variations to the original quotation must be agreed in writing.</p>
+        <p>Payment schedules vary according to project size and complexity. For projects exceeding $10,000, we typically require a deposit of 30% upon acceptance of the quotation, with progress payments at agreed milestones. For smaller projects, payment terms will be specified in your quotation.</p>
+        <p>All invoices are payable within seven days of issue. We accept payment by bank transfer, credit card, or cheque. Late payments may incur interest at the rate of 2% per month on outstanding amounts.</p>
+        <p>We pride ourselves on completing projects within agreed timeframes. However, completion dates are estimates based on normal working conditions. Delays may occur due to weather, material availability, variations to the scope of work, or circumstances beyond our control.</p>
+        <p>We will keep you informed of any potential delays and work diligently to minimise their impact on your project. Time remains of the essence in our agreements, and we commit to progressing work as efficiently as possible.</p>
+        <p>High Vision Renovations guarantees all workmanship for seven years from project completion. This warranty covers defects arising from our workmanship but excludes normal wear and tear, misuse, or damage caused by others.</p>
+        <p>We source premium materials from trusted suppliers and pass on all manufacturer warranties to you. Should any defects arise in materials supplied by us, we will coordinate warranty claims on your behalf.</p>
+        <p>You must provide clear access to work areas and ensure the site is safe for our team. Please remove or protect valuable items before work commences. You are responsible for obtaining any necessary permits unless we have specifically agreed to arrange these on your behalf.</p>
+        <p>Timely decisions on selections such as fixtures, finishes, and colours are essential to maintain project schedules. We will provide guidance and recommendations, but final choices remain your responsibility.</p>
+    </div>
+  </section>
+
+  <ContactForm variant="contact" />
+</BaseLayout>
